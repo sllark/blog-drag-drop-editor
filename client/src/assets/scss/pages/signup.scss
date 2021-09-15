@@ -1,0 +1,49 @@
+.signupPage{
+  width: 100%;
+  padding: 3rem;
+
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+
+  //border: 1px solid;
+  //min-height: 85vh;
+
+  h2{
+    font-size: 2.8rem;
+    margin: 2rem 0 3rem;
+  }
+
+  form{
+
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    //border: 1px solid;
+    width: 100%;
+    max-width: 60rem;
+
+    button{
+      border: 1px solid $color-gray-500;
+      font-size: 2.2rem;
+      padding: 0.3rem 3.5rem;
+      margin-top: 2rem;
+
+      &:focus{
+        border-color: $color-text;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      }
+    }
+
+
+
+    .inValid{
+      border: 1px solid red;
+    }
+
+  }
+
+
+
+}

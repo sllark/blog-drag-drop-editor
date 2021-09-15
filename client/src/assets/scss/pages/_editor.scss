@@ -1,0 +1,270 @@
+.editor {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+
+.editorMainWindow {
+
+  //margin-top: $editor-header-height;
+
+  width: 80%;
+  font-size: 2rem;
+  min-height: 30rem;
+  outline: 1px solid rgba(170, 170, 170, 0.7);
+  outline-offset: -2px;
+  max-height: calc(100vh - #{$editor-header-height});
+  z-index: 1000;
+  overflow-y: auto;
+  position: relative;
+  padding: 3rem 0 6rem;
+
+  //overflow-x: hidden;
+
+  .windowComponent {
+    outline: 1px dashed rgba(170, 170, 170, 0.7);
+    outline-offset: -2px;
+
+    & * {
+      pointer-events: none;
+    }
+  }
+
+  .windowComponent:hover {
+    outline: 1px dashed #2a6ba2;
+  }
+
+  .windowComponent.breaker {
+    padding: 0 !important;
+    border: 5px solid springgreen;
+    display: inline-block;
+    height: 100%;
+    min-height: 60px;
+    //width: 10px;
+  }
+
+  .empty {
+    //padding: 20px 0;
+  }
+
+  .dragging {
+    opacity: 0.4 !important;
+    border: 3px solid springgreen;
+
+    //width: 4px;
+    //height: 4px;
+    //overflow: hidden;
+  }
+
+  .windowComponent.selected {
+    outline: 3px solid #3b97e3 !important;
+  }
+
+  .windowComponent.focused {
+    outline: 3px solid springgreen !important;
+  }
+
+  .windowComponent.windowButton {
+  }
+
+
+  .compController {
+
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    .copyControl, .deleteControl {
+      position: absolute;
+      right: 0;
+      top: -15px;
+
+      width: 20px;
+      height: 20px;
+      background-color: white;
+      cursor: pointer;
+    }
+
+    .copyControl {
+      right: 20px;
+    }
+
+  }
+
+
+}
+
+
+.editorSidebarComponents, .editorSidebarStyles {
+  //margin-top: $editor-header-height;
+
+  width: 20%;
+  height: auto;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $color-primary;
+  user-select: none;
+  padding: 2rem 1rem;
+  color: white;
+  max-height: calc(100vh - #{$editor-header-height});
+  overflow-y: auto;
+
+}
+
+.editorSidebarComponents {
+  flex-flow: row wrap;
+  padding: 1rem;
+
+
+  .component {
+    width: 7rem;
+    height: 7rem;
+    font-size: 1.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 5px;
+    background-color: $color-secondary;
+    border: 1px solid $color-secondary-light;
+    cursor: move;
+    padding: 10px;
+
+  }
+
+}
+
+.editorSidebarStyles {
+
+  .styleList {
+    width: 100%;
+    margin-bottom: 2rem;
+
+    h4 {
+      font-size: 2rem;
+      color: #f3f3f3;
+      font-weight: bold;
+      border: 1px solid rgba(white, 0.3);
+      padding: 0 1rem;
+      cursor: pointer;
+    }
+
+    .list {
+      margin-top: 1rem;
+      padding: 0 1rem;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+
+      select, input {
+        color: #6c757d;
+        border: 1px solid transparent;
+      }
+
+
+      input:focus,
+      select:focus {
+        border: 1px solid #6c757d;
+      }
+
+
+      .styleBox {
+        display: flex;
+        flex-flow: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        font-size: 1.6rem;
+        margin: 1rem 0;
+        //width: 9.5rem;
+        width: 45%;
+
+
+        label {
+          margin-bottom: 0.5rem;
+        }
+
+        input, select {
+          padding: 0.5rem 0;
+          background-color: rgba(0, 0, 0, .25);
+          box-shadow: none;
+          color: #cccccc;
+          height: 100%;
+          font-size: 1.2rem;
+          width: 50% !important;
+
+          option {
+            background-color: $color-primary;
+            color: #fff;
+          }
+        }
+
+        input {
+          padding: 0.5rem !important;
+        }
+
+        .styleBoxDropdown {
+          width: 100% !important;
+        }
+
+      }
+
+      .styleBox.w-100 {
+        width: 95% !important;
+
+        select {
+          font-size: 1.5rem !important;
+
+        }
+      }
+
+      .styleBox.input-w-100 {
+        input {
+          border: 1px solid $color-secondary-light;
+          width: 100% !important;
+
+          &:focus, &:visited {
+            border: 1px solid #6c757d;
+          }
+
+        }
+      }
+
+    }
+
+    .hideList {
+      display: none;
+    }
+
+    .fourPropertiesCont {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+      background-color: $color-primary-dark;
+      padding: 1rem;
+      width: 100%;
+      margin: 1rem 0;
+
+      h5 {
+        width: 100%;
+        color: white;
+        font-size: 1.7rem;
+      }
+
+
+    }
+
+
+    input[type="color"] {
+      height: 4.5rem !important;
+    }
+
+
+  }
+
+}
+

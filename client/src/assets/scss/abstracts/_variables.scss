@@ -1,0 +1,55 @@
+//Colors
+
+
+$editor-header-height: 6rem;
+
+$color-darkest-blue:#000c1c;
+
+$color-primary: #1e6262;
+$color-primary-light:lighten($color-primary,5%);
+$color-primary-dark:darken($color-primary, 5%);
+
+
+$color-secondary:#2d767f;
+$color-secondary-dark: darken($color-secondary, 5%);
+$color-secondary-light:lighten($color-secondary,5%);
+
+
+$color-tertiary: #b4f1f1;
+
+$color-light:#ecfffb;
+
+$color-bg:#ffffff;
+//$color-container-bg: #fcfcfc;
+$color-container-bg: #fff;
+$color-text:#767e88;
+
+
+
+
+
+
+$color-text-dark:#666666;
+$color-white:#fff;
+$color-gray-100: #f8f9fa;
+$color-gray-200: #e9ecef;
+$color-gray-300: #dee2e6;
+$color-gray-400: #ced4da;
+$color-gray-500: #adb5bd;
+$color-gray-600: #6c757d;
+$color-gray-700: #495057;
+$color-gray-800: #343a40;
+$color-gray-900: #212529;
+$color-black:    #000;
+
+$color-text-muted: #6c757d;
+
+
+
+
+//Font Weights
+
+$font-weight-light: 300;
+$font-weight-normal:400;
+$font-weight-bold:  700;
+$font-weight-bolder:bolder;

@@ -1,0 +1,29 @@
+input,textarea{
+
+  border: 1px solid $color-gray-500;
+  color: $color-text;
+  padding: 0.5rem 1rem;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  width: 95%;
+
+  &:focus{
+
+    border-color: $color-text;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+
+  }
+
+
+  &::placeholder{
+    opacity: 0.5;
+  }
+
+
+}
+
+
+label{
+  font-size: 2rem;
+  width: 95%;
+}
