@@ -8,18 +8,6 @@ const User = require('../models/User');
 
 exports.postLogin = (req, res, next) => {
 
-    const validation = validationResult(req);
-
-    if (!validation.isEmpty()) {
-        let errors = validation.array();
-
-        const error = new Error(errors[0].msg);
-        error.statusCode = 422;
-        error.errors = errors;
-        throw error;
-
-    }
-
     let fetchedUser;
     const {email, password} = req.body;
 
@@ -68,19 +56,6 @@ exports.postLogin = (req, res, next) => {
 
 
 exports.postSignup = (req, res, next) => {
-
-    const validation = validationResult(req);
-
-    if (!validation.isEmpty()) {
-        let errors = validation.array();
-
-
-        const error = new Error(errors[0].msg);
-        error.statusCode = 422;
-        error.errors = errors;
-        throw error;
-
-    }
 
 
     const {firstName,lastName,email, password} = req.body;

@@ -1,17 +1,17 @@
 import React from "react";
 import {Redirect} from 'react-router-dom'
 
-import axios from "../../helper/axios";
+import axios from "../helper/axios";
 
-import Input from '../../components/form/Input'
-import Spinner from '../../components/UI/Spinner'
-import ShowResponse from "../../components/UI/ShowResponse";
+import Input from '../components/form/Input'
+import Spinner from '../components/UI/Spinner'
+import ShowResponse from "../components/UI/ShowResponse";
 
-import {validatePassword} from '../../helper/validation';
-import handleAxiosError from '../../helper/handleAxiosError';
+import {validatePassword} from '../helper/validation';
+import handleAxiosError from '../helper/handleAxiosError';
 import isEmail from "validator/lib/isEmail";
 
-import configs from "../../assets/config/configs";
+import configs from "../assets/config/configs";
 
 class SignUp extends React.Component {
 

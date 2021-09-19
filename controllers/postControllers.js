@@ -2,29 +2,14 @@ const {validationResult} = require('express-validator');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+const User = require('../models/User');
 const Post = require('../models/Post');
 
 
 exports.savePost = (req, res, next) => {
 
-    const validation = validationResult(req);
-
-    if (!validation.isEmpty()) {
-        let errors = validation.array();
-
-        const error = new Error(errors[0].msg);
-        error.statusCode = 422;
-        error.errors = errors;
-        throw error;
-
-    }
-
-
     const {components, title, featuredImage, postDescription} = req.body;
 
-
-    // console.log('req.body=  ', req.body);
-    // console.log('components=  ', components);
 
     let newPost = new Post({
         components: components,
@@ -52,24 +37,16 @@ exports.savePost = (req, res, next) => {
 
 exports.updatePost = (req, res, next) => {
 
-    const validation = validationResult(req);
-
-    if (!validation.isEmpty()) {
-        let errors = validation.array();
-
-        const error = new Error(errors[0].msg);
-        error.statusCode = 422;
-        error.errors = errors;
-        throw error;
-
-    }
-
 
     const {components, title, featuredImage, postDescription, postId} = req.body;
 
 
     Post.findById(postId)
         .then(post => {
+
+            if (post.userID !== req.user.userID) throw new Error("User does not match.")
+
+
             post.components = components;
             post.title = title;
             post.featuredImage = featuredImage;
@@ -91,18 +68,6 @@ exports.updatePost = (req, res, next) => {
 
 exports.deletePost = (req, res, next) => {
 
-    const validation = validationResult(req);
-
-    if (!validation.isEmpty()) {
-        let errors = validation.array();
-
-        const error = new Error(errors[0].msg);
-        error.statusCode = 422;
-        error.errors = errors;
-        throw error;
-
-    }
-
 
     let postId = req.body.postId;
 
@@ -111,30 +76,21 @@ exports.deletePost = (req, res, next) => {
         .then(deletedPost => {
             res.status(200).json({deletedPost, message: "success"});
         })
+        .catch((err) => {
+            if (!err.statusCode)
+                err.statusCode = 400;
+            next(err);
+        })
 
 }
 
 
 exports.getPost = (req, res, next) => {
 
-    const validation = validationResult(req);
-
-    if (!validation.isEmpty()) {
-        let errors = validation.array();
-
-        const error = new Error(errors[0].msg);
-        error.statusCode = 422;
-        error.errors = errors;
-        throw error;
-
-    }
-
-
     const postID = req.params.id;
 
-
     Post.findById(postID)
-        .populate("userID","firstName lastName","User")
+        .populate("userID", "firstName lastName", "User")
         .then(post => {
 
             res.status(200).json({post: post});
@@ -152,16 +108,6 @@ exports.getPost = (req, res, next) => {
 
 exports.getMultiplePosts = (req, res, next) => {
 
-    const validation = validationResult(req);
-
-    if (!validation.isEmpty()) {
-        let errors = validation.array();
-
-        const error = new Error(errors[0].msg);
-        error.statusCode = 422;
-        error.errors = errors;
-        throw error;
-    }
 
     let page = Number(req.query.page)
 
@@ -176,7 +122,7 @@ exports.getMultiplePosts = (req, res, next) => {
                 .sort({_id: -1})
                 .skip((page - 1) * 10)
                 .limit(10)
-                .populate("userID","firstName lastName","User")
+                .populate("userID", "firstName lastName", "User")
                 .then(posts => {
                     res.status(200).json({posts: posts, count: count});
                 })
@@ -192,35 +138,26 @@ exports.getMultiplePosts = (req, res, next) => {
 }
 
 
-exports.getMyPosts = (req, res, next) => {
+exports.getUserPosts = (req, res, next) => {
 
-    const validation = validationResult(req);
-
-    if (!validation.isEmpty()) {
-        let errors = validation.array();
-
-        const error = new Error(errors[0].msg);
-        error.statusCode = 422;
-        error.errors = errors;
-        throw error;
-    }
 
     let page = Number(req.query.page)
 
     if (page <= 0) page = 1;
 
+    console.log(req.query)
 
-    Post.countDocuments({userID: req.user.userID})
+    Post.countDocuments({userID: req.query.userID})
         .then(count => {
 
-            Post.find({userID: req.user.userID})
+            Post.find({userID: req.query.userID})
                 .select('-components')
                 .sort({_id: -1})
                 .skip((page - 1) * 10)
                 .limit(10)
-                .populate("userID","firstName lastName","User")
+                .populate("userID", "firstName lastName", "User")
                 .then(posts => {
-                    res.status(200).json({posts: posts, count: count, user: req.user});
+                    res.status(200).json({posts: posts, count: count});
                 })
                 .catch(err => {
                     if (!err.statusCode)
@@ -228,6 +165,33 @@ exports.getMyPosts = (req, res, next) => {
                     next(err);
                 })
 
+
+        })
+        .catch(err => {
+            if (!err.statusCode)
+                err.statusCode = 500;
+            next(err);
+        })
+
+}
+
+
+exports.getUserDetails = (req, res, next) => {
+
+
+    Post.countDocuments({userID: req.query.userID})
+        .then(count => {
+
+            User.findById(req.query.userID)
+                .select("firstName lastName")
+                .then(user => {
+                    res.status(200).json({user, totalPosts: count});
+                })
+                .catch(err => {
+                    if (!err.statusCode)
+                        err.statusCode = 500;
+                    next(err);
+                })
 
         })
         .catch(err => {

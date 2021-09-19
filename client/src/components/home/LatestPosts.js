@@ -20,11 +20,11 @@ class LatestPosts extends React.Component {
 
 
     componentDidMount() {
-        this.fetchPosts(1, this.props.loadMyPosts)
+        this.fetchPosts(1, this.props.userID)
     }
 
 
-    fetchPosts = (pageToLoad = 1, loadMyPosts = false) => {
+    fetchPosts = (pageToLoad = 1, userID = "") => {
 
 
         if (pageToLoad <= 0 || pageToLoad === this.state.currentPage) return;
@@ -34,13 +34,22 @@ class LatestPosts extends React.Component {
 
         this.setState({isLoading: true})
 
-        let fetchUrl = "/getPosts/?page=" + pageToLoad;
+        let fetchUrl = "/getPosts";
 
-        if (loadMyPosts)
-            fetchUrl = "/getMyPosts/?page=" + pageToLoad;
+        if (userID) {
+            fetchUrl = "/getUserPosts";
+            fetchUrl+="?page=" + pageToLoad;
+            fetchUrl+="&userID=" + userID;
+        }else {
+            fetchUrl+="?page=" + pageToLoad;
+        }
+
+
 
         axios.get(fetchUrl)
             .then(result => {
+
+                console.log(result)
 
                 this.setState((preveState) => {
                     return {
@@ -77,6 +86,8 @@ class LatestPosts extends React.Component {
                 posts.splice(postIndex, 1);
                 this.setState({posts})
                 this.setResponsePreview("success", "Post deleted successfully.")
+
+                if(this.props.onPostDelete) this.props.onPostDelete(postId);
 
             })
             .catch(error => {

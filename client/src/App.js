@@ -1,12 +1,14 @@
 import React from "react";
 import {BrowserRouter as Router, Route, Switch,} from "react-router-dom";
 
-import Home from './containers/home/Home';
-import Editor from './containers/Editor/Editor';
-import SignUp from './containers/auth/SignUp';
-import Login from './containers/auth/Login';
-import Profile from "./containers/User/Profile";
-import Post from "./containers/post/Post";
+import PrivateRoute from "./helper/PrivateRoute";
+
+import Home from './containers/Home';
+import Editor from './containers/Editor';
+import SignUp from './containers/SignUp';
+import Login from './containers/Login';
+import Profile from "./containers/Profile";
+import Post from "./containers/Post";
 
 import './assets/scss/main.scss';
 import MainHeader from "./components/header/MainHeader";
@@ -45,7 +47,6 @@ class App extends React.Component {
     updateState = (stateToUpdate) => {
 
         if (stateToUpdate.token) {
-            console.log(stateToUpdate)
             localStorage.setItem('token', stateToUpdate.token);
             localStorage.setItem('userID', stateToUpdate.userID);
         }
@@ -94,24 +95,39 @@ class App extends React.Component {
                         )}
                     />
 
-                    <Route
+                    <PrivateRoute
                         path="/editor"
                         render={props =>
-                            <Editor
-                                {...props}
-                                userID={this.state.userID}
-                                token={this.state.token}/>
+                            <Editor {...props}/>
+                        }
+                    />
+
+                    <Route
+                        path="/testEditor"
+                        render={props =>
+                            <Editor {...props}/>
                         }
                     />
 
 
-                    <Route
-                        path="/about"
+                    <PrivateRoute
+                        path="/profile/:id"
                         render={
                             props => (
                                 <>
                                     <MainHeader {...props} updateState={this.updateState}/>
-                                    <Profile token={this.state.token}/>
+                                    <Profile {...props} key={props.match.params.id}/>
+                                </>
+                            )}
+                    />
+
+                    <PrivateRoute
+                        path="/profile"
+                        render={
+                            props => (
+                                <>
+                                    <MainHeader {...props} updateState={this.updateState}/>
+                                    <Profile {...props}/>
                                 </>
                             )}
                     />
@@ -123,7 +139,7 @@ class App extends React.Component {
                             props => (
                                 <>
                                     <MainHeader {...props} updateState={this.updateState}/>
-                                    <Post {...props} token={this.state.token}/>
+                                    <Post {...props} />
                                 </>
                             )}
                     />
@@ -134,7 +150,7 @@ class App extends React.Component {
                         render={props => (
                             <>
                                 <MainHeader {...props} updateState={this.updateState}/>
-                                <Home isAuth={this.state.isAuth} token={this.state.token}/>
+                                <Home />
                             </>
                         )}
 

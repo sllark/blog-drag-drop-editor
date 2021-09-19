@@ -14,7 +14,7 @@ const ListingPost = (props) => {
     return (
         <div className="postContainer">
             <Link
-                to={'post/' + props.post._id}
+                to={'/post/' + props.post._id}
                 className="postContainer__img">
                 <img
                     src={props.post.featuredImage} alt=""/>
@@ -27,11 +27,9 @@ const ListingPost = (props) => {
                         props.post.description
                     }
                 </p>
-                <p>
-                    {
-                     getPostInfo(props.post)
-                    }
-                </p>
+                {
+                    getPostInfo(props.post)
+                }
                 <div className="postContainer__content__btns">
 
 
@@ -39,7 +37,7 @@ const ListingPost = (props) => {
                         props.loadMyPosts ?
                             (
                                 <>
-                                    <Link to={'post/' + props.post._id} className="btn btn--secondary">View</Link>
+                                    <Link to={'/post/' + props.post._id} className="btn btn--secondary">View</Link>
                                     <Link to={{
                                         pathname: '/editor',
                                         search: ("postId=" + props.post._id + "&shouldEdit=" + true)
@@ -48,13 +46,14 @@ const ListingPost = (props) => {
                                     <button
                                         className="btn btn--danger"
                                         onClick={(e) => props.deletePost(props.post._id)}
-                                    >Delete
+                                    >
+                                        Delete
                                     </button>
                                 </>
                             )
                             :
                             (
-                                <Link to={'post/' + props.post._id} className="btn btn--secondary">Read More</Link>
+                                <Link to={'/post/' + props.post._id} className="btn btn--secondary">Read More</Link>
                             )
                     }
 

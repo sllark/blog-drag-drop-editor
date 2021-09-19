@@ -11,9 +11,11 @@ export default function EditorHeader(props) {
     const [showNav,setShowNav] = useState(false);
 
     const logout =  ()=>{
+        setShowNav(false)
         localStorage.removeItem('token')
         localStorage.removeItem('userID')
         props.updateState({token:null,userId:null,isAuth:null})
+        props.history.push('/')
     }
 
 
@@ -48,7 +50,7 @@ export default function EditorHeader(props) {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/about" className="btn--white" onClick={()=>setShowNav(false)}>
+                    <Link to={"/profile/"+localStorage.getItem('userID')} className="btn--white" onClick={()=>setShowNav(false)}>
                         My Posts
                     </Link>
                 </li>
@@ -58,7 +60,7 @@ export default function EditorHeader(props) {
                     </Link>
                 </li>
                 <li>
-                    <a onClick={logout} className="btn--white" onClick={()=>setShowNav(false)}>
+                    <a onClick={logout} className="btn--white">
                         Logout
                     </a>
                 </li>

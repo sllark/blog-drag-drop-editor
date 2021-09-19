@@ -1,15 +1,15 @@
 import React from "react";
 
-import Input from '../../components/form/Input'
-import Spinner from '../../components/UI/Spinner'
-import ShowStatus from '../../components/UI/ShowStatus';
-import {validateEmail, validatePassword} from "../../helper/validation";
+import Input from '../components/form/Input'
+import Spinner from '../components/UI/Spinner'
+import ShowStatus from '../components/UI/ShowStatus';
+import {validateEmail, validatePassword} from "../helper/validation";
 import isEmail from 'validator/lib/isEmail';
-import axios from "../../helper/axios";
-import configs from "../../assets/config/configs";
-import handleAxiosError from "../../helper/handleAxiosError";
+import axios from "../helper/axios";
+import configs from "../assets/config/configs";
+import handleAxiosError from "../helper/handleAxiosError";
 import {Redirect} from "react-router-dom";
-import ShowResponse from "../../components/UI/ShowResponse";
+import ShowResponse from "../components/UI/ShowResponse";
 
 
 class Login extends React.Component {

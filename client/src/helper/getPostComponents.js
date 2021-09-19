@@ -13,7 +13,6 @@ const getPostComponents = (components,onDragStart=null,onDragEnd=null)=>{
         let windowComp = ele.type;
         let component;
 
-        console.log(ele)
 
         switch (windowComp) {
 

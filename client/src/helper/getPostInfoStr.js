@@ -1,16 +1,28 @@
+import React from "react";
+import {Link} from "react-router-dom";
+
 const getPostInfo = (post)=>{
 
-    let info = "";
+    //        <Link to={post.userID._id}>`${post.userID.firstName} ${post.userID.lastName}`</Link>
 
-    if(post.userID?.firstName && post.userID?.lastName){
-        info+= `By - ${post.userID.firstName} ${post.userID.lastName}`;
-    }
 
+    let info = null;
+
+    var options = { year: 'numeric', month: 'long', day: 'numeric' };
     if(post.createdAt){
-        var options = { year: 'numeric', month: 'long', day: 'numeric' };
-        info+= ` on ${new Date(post.createdAt).toLocaleDateString(undefined,options)}`
+        info = ` on ${new Date(post.createdAt).toLocaleDateString(undefined,options)}`
     }
 
+
+
+    return (
+        <p className="about" style={{display:'flex'}}>
+            By -&nbsp;
+            <Link to={"/profile/"+post.userID._id}>{post.userID.firstName} {post.userID.lastName}</Link>
+            &nbsp;{info}
+        </p>
+
+    )
 
     return info;
 }

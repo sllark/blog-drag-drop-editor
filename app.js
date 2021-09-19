@@ -35,7 +35,7 @@ app.use(postRoutes);
 
 app.use('/', (req, res, next) => {
 
-    res.json({"message": "success"});
+    res.json({"message": "success 1"});
 
 })
 

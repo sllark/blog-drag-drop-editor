@@ -1,7 +1,10 @@
 const express = require('express');
 const {body} = require('express-validator');
 
+
 const User = require('../models/User');
+const validate = require('../helper/validate');
+
 
 const authControllers = require('../controllers/authControllers')
 
@@ -24,6 +27,7 @@ router.post('/signup',
         body('firstName').not().isEmpty().isLength({min: 1}).withMessage('First Name not found.'),
         body('lastName').not().isEmpty().isLength({min: 1}).withMessage('Last Name not found.')
     ],
+    validate,
     authControllers.postSignup);
 
 
@@ -42,6 +46,7 @@ router.post('/login',
         }),
         body('password','Password is too short.').not().isEmpty().isLength({min: 5})
     ],
+    validate,
     authControllers.postLogin);
 
 

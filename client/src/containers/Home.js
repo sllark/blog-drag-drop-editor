@@ -1,6 +1,6 @@
 import React from "react";
-import HomeHero from '../../components/home/HomeHero'
-import LatestPosts from '../../components/home/LatestPosts'
+import HomeHero from '../components/home/HomeHero'
+import LatestPosts from '../components/home/LatestPosts'
 
 
 class Home extends React.Component {

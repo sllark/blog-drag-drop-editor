@@ -1,13 +1,13 @@
 import React from "react";
-import {Redirect} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 
-import Spinner from '../../components/UI/Spinner'
-import ShowResponse from "../../components/UI/ShowResponse";
+import Spinner from '../components/UI/Spinner'
+import ShowResponse from "../components/UI/ShowResponse";
 
-import getPostComponents from "../../helper/getPostComponents";
-import axios from "../../helper/axios";
-import getPostInfo from "../../helper/getPostInfoStr";
-import handleAxiosError from "../../helper/handleAxiosError";
+import getPostComponents from "../helper/getPostComponents";
+import axios from "../helper/axios";
+import getPostInfo from "../helper/getPostInfoStr";
+import handleAxiosError from "../helper/handleAxiosError";
 
 
 class Post extends React.Component {
@@ -127,12 +127,9 @@ const PostMeta = (props) => {
     return (
         <>
             <h1 className="title"> {props.meta.title} </h1>
-            <p className="about">
-                {
-                    getPostInfo(props.meta)
-                }
-            </p>
-            {props.meta.featuredImage ? <img src={props.meta.featuredImage} alt="" className="featuredImage"/> : null}
+            {
+                getPostInfo(props.meta)
+            }
         </>
     )
 

@@ -1,15 +1,15 @@
 import React from "react";
 
 
-import EditorHeader from '../../components/Editor/EditorHeader';
-import EditorWindow from './EditorWindow';
-import EditorComponents from '../../components/Editor/EditorComponentsSidebar';
-import EditorStylesSidebar from '../../components/Editor/EditorStylesSidebar';
-import EditorModal from '../../components/Editor/EditorModal';
+import EditorHeader from '../components/Editor/EditorHeader';
+import EditorWindow from '../components/Editor/EditorWindow';
+import EditorComponents from '../components/Editor/EditorComponentsSidebar';
+import EditorStylesSidebar from '../components/Editor/EditorStylesSidebar';
+import EditorModal from '../components/Editor/EditorModal';
 
-import axios from "../../helper/axios";
-import handleAxiosError from "../../helper/handleAxiosError";
-import ShowResponse from "../../components/UI/ShowResponse";
+import axios from "../helper/axios";
+import handleAxiosError from "../helper/handleAxiosError";
+import ShowResponse from "../components/UI/ShowResponse";
 
 
 function getCompIndex(id, components) {
@@ -68,7 +68,7 @@ class Editor extends React.Component {
 
         this.setState({
             showSpinner: true,
-            postId: postId,
+            postId: postId
         });
 
         axios.get(
