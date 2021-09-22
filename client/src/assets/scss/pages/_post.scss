@@ -3,7 +3,7 @@
 
 
   .title{
-    font-size: 4rem;
+    font-size: 3.5rem;
     color: rgb(47, 53, 53);
     font-family: fell,Georgia,Cambria,"Times New Roman",Times,serif;
     line-height: 1.2;
@@ -13,6 +13,10 @@
   .about{
     font-size: 1.8rem;
     margin-bottom: 0.5rem;
+
+    *{
+      display: inline;
+    }
   }
 
   .featuredImage{

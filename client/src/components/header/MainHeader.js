@@ -77,9 +77,9 @@ export default function EditorHeader(props) {
                 {defaultLinks}
             </ul>
             <div className={"hamburgerMenu "+(showNav ? "makeCross": "")} onClick={()=>setShowNav(!showNav)}>
-                <div></div>
-                <div></div>
-                <div></div>
+                <div/>
+                <div/>
+                <div/>
             </div>
         </div>
     );

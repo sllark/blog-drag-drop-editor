@@ -3,9 +3,6 @@ import {Link} from "react-router-dom";
 
 const getPostInfo = (post)=>{
 
-    //        <Link to={post.userID._id}>`${post.userID.firstName} ${post.userID.lastName}`</Link>
-
-
     let info = null;
 
     var options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -16,7 +13,7 @@ const getPostInfo = (post)=>{
 
 
     return (
-        <p className="about" style={{display:'flex'}}>
+        <p className="about">
             By -&nbsp;
             <Link to={"/profile/"+post.userID?._id}>{post.userID?.firstName} {post.userID?.lastName}</Link>
             &nbsp;{info}
@@ -24,7 +21,6 @@ const getPostInfo = (post)=>{
 
     )
 
-    return info;
 }
 
 

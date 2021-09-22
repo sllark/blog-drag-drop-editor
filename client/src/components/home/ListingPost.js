@@ -21,10 +21,10 @@ const ListingPost = (props) => {
             </Link>
 
             <div className="postContainer__content container">
-                <h2>{props.post.title}</h2>
+                <h2>{truncateString(props.post.title,50)}</h2>
                 <p>
                     {
-                        props.post.description
+                        truncateString(props.post.description,180)
                     }
                 </p>
                 {
@@ -66,6 +66,11 @@ const ListingPost = (props) => {
 
 }
 
+
+function truncateString(str, num) {
+    if (str.length > num) return str.slice(0, num) + "...";
+     else return str;
+}
 
 
 export default ListingPost;
