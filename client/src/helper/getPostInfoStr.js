@@ -18,7 +18,7 @@ const getPostInfo = (post)=>{
     return (
         <p className="about" style={{display:'flex'}}>
             By -&nbsp;
-            <Link to={"/profile/"+post.userID._id}>{post.userID.firstName} {post.userID.lastName}</Link>
+            <Link to={"/profile/"+post.userID?._id}>{post.userID?.firstName} {post.userID?.lastName}</Link>
             &nbsp;{info}
         </p>
 

@@ -98,6 +98,80 @@ class Editor extends React.Component {
 
     }
 
+    savePost = (e, saveFromModal = false) => {
+
+
+        const {title, featuredImage, postDescription, postId} = this.state;
+
+        if (title === "") {
+            this.setState({showPostModal: true});
+            return;
+        }
+
+
+        if (this.state.components.length < 1) {
+            if (saveFromModal) return;
+            alert('Please add content before svaing the Post!');
+            return;
+        }
+
+
+        this.setState({
+            responseMsg: "Saving...",
+            responseStatus: 'saving',
+        })
+
+        let componentsToSave = [];
+
+        for (let i = 0; i < this.state.components.length; i++) {
+            componentsToSave.push({...this.state.components[i]});
+
+            componentsToSave[i].dragging = false;
+            componentsToSave[i].focused = false;
+            componentsToSave[i].selected = false;
+            componentsToSave[i].dragable = false;
+
+            // removing ref to avoid circular object errors
+            delete componentsToSave[i].ref;
+        }
+
+
+        let urlRoute = '/savePost',
+            reqBody = {
+                components: componentsToSave,
+                title: title,
+                featuredImage: featuredImage,
+                postDescription: postDescription
+            };
+
+
+        if (postId) {
+            urlRoute = '/updatePost';
+            reqBody.postId = postId;
+        }
+
+
+        axios.post(urlRoute, JSON.stringify(reqBody))
+            .then(result => {
+
+                this.setState({
+                    postId: result.data.id
+                });
+
+                this.setResponsePreview("success", "Post saved successfully.")
+
+                if (!postId)
+                    this.props.history.replace({
+                            pathname: '/editor',
+                            search: ("postId=" + result.data.id + "&shouldEdit=" + true)
+                        })
+
+            })
+            .catch(error => {
+                handleAxiosError(error, this.setResponsePreview, "Failed to save post.")
+            })
+
+    }
 
     showSidebarComponents = () => {
         this.setState({showComponents: true})
@@ -168,74 +242,6 @@ class Editor extends React.Component {
 
     }
 
-    savePost = (e, saveFromModal = false) => {
-
-
-        const {title, featuredImage, postDescription, postId} = this.state;
-
-        if (title === "") {
-            this.setState({showPostModal: true});
-            return;
-        }
-
-
-        if (this.state.components.length < 1) {
-            if (saveFromModal) return;
-            alert('Please add content before svaing the Post!');
-            return;
-        }
-
-
-        this.setState({
-            responseMsg: "Saving...",
-            responseStatus: 'saving',
-        })
-
-        let componentsToSave = [];
-
-        for (let i = 0; i < this.state.components.length; i++) {
-            componentsToSave.push({...this.state.components[i]});
-
-            componentsToSave[i].dragging = false;
-            componentsToSave[i].focused = false;
-            componentsToSave[i].selected = false;
-            componentsToSave[i].dragable = false;
-
-            // removing ref to avoid circular object errors
-            delete componentsToSave[i].ref;
-        }
-
-
-        let urlRoute = '/savePost',
-            reqBody = {
-                components: componentsToSave,
-                title: title,
-                featuredImage: featuredImage,
-                postDescription: postDescription
-            };
-
-
-        if (postId) {
-            urlRoute = '/updatePost';
-            reqBody.postId = postId;
-        }
-
-
-        axios.post(urlRoute, JSON.stringify(reqBody))
-            .then(result => {
-
-                this.setState({
-                    postId: result.data.id
-                });
-
-                this.setResponsePreview("success", "Post saved successfully.")
-
-            })
-            .catch(error => {
-                handleAxiosError(error, this.setResponsePreview, "Failed to save post.")
-            })
-
-    }
 
     showModal = () => {
         this.setState({
@@ -279,7 +285,6 @@ class Editor extends React.Component {
             /> : null;
 
 
-
         if (this.state.showComponents)
             sidebar = <EditorComponents/>;
         else {
@@ -299,7 +304,6 @@ class Editor extends React.Component {
                 component={this.state.components[index]}
             />;
         }
-
 
 
         return (
