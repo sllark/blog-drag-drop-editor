@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const {JWT_SECRET} = require('../config/keys')
 
 module.exports = (req, res, next) => {
 
@@ -14,7 +15,7 @@ module.exports = (req, res, next) => {
 
     let decoded;
     try {
-        decoded = jwt.verify(token, 'thisismyfuckingsecret');
+        decoded = jwt.verify(token, JWT_SECRET);
     } catch (error) {
         error.message='Not Authorized';
         error.statusCode = 401;
