@@ -356,10 +356,10 @@ const getNewComponent = () => {
                 value: '500',
             },
             borderColor: {
-                value: '#545454',
+                value: '#292929',
             },
             color: {
-                value: '#545454',
+                value: '#292929',
             },
             opacity: {
                 value: '100',
