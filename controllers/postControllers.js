@@ -41,11 +41,10 @@ exports.updatePost = (req, res, next) => {
     const {components, title, featuredImage, postDescription, postId} = req.body;
 
 
-    Post.findById(postId)
+    Post.find({_id: postId, userID: req.user.userID})
         .then(post => {
 
-            if (post.userID !== req.user.userID) throw new Error("User does not match.")
-
+            // if (post.userID.toString() !== req.user.userID.toString()) throw new Error("User does not match.")
 
             post.components = components;
             post.title = title;
