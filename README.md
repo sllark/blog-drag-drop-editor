@@ -9,9 +9,8 @@ The site is built with REACT, NODE, EXPRESS and MONGODB.
 You can check out the App here: [https://blog-drag-drop-editor.vercel.app](https://blog-drag-drop-editor.vercel.app)
 
 
-Here are a few demo accounts:
+Here is a demo account:
 
 Email: demo1@mail.com
-
 Password: helloworld
 
