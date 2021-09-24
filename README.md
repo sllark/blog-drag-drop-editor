@@ -6,4 +6,4 @@ You can also see post of other users on homepage as well.
 
 The site is built with REACT, NODE, EXPRESS and MONGODB.
 
-You can check out the App here: [http://social-media-site-bay.vercel.app/](http://social-media-site-bay.vercel.app/)
+You can check out the App here: [https://blog-drag-drop-editor.vercel.app](https://blog-drag-drop-editor.vercel.app)
