@@ -7,3 +7,11 @@ You can also see post of other users on homepage as well.
 The site is built with REACT, NODE, EXPRESS and MONGODB.
 
 You can check out the App here: [https://blog-drag-drop-editor.vercel.app](https://blog-drag-drop-editor.vercel.app)
+
+
+Here are a few demo accounts:
+
+Email: demo1@mail.com
+
+Password: helloworld
+
